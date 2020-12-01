@@ -1,6 +1,7 @@
 package fact.it.reviewms.model;
 
-import javax.persistence.Id;
+
+import org.springframework.data.annotation.Id;
 
 public class Review {
     @Id
