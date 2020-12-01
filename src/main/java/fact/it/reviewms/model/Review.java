@@ -2,7 +2,9 @@ package fact.it.reviewms.model;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "revieuws")
 public class Review {
     @Id
     private String id;
