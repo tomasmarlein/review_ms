@@ -4,6 +4,8 @@ package fact.it.reviewms.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "revieuws")
 public class Review {
     @Id
@@ -11,14 +13,16 @@ public class Review {
     private Integer movieId;
     private String text;
     private double rating;
+    private Date date;
 
     public Review() {
     }
 
-    public Review(Integer movieId, String text, double rating) {
+    public Review(Integer movieId, String text, double rating, Date date) {
         this.movieId = movieId;
         this.text = text;
         this.rating = rating;
+        this.date = date;
     }
 
     public String getId() {
@@ -51,5 +55,13 @@ public class Review {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

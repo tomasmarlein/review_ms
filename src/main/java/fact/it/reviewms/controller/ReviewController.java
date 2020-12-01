@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,11 +19,11 @@ public class ReviewController {
     @PostConstruct
     public void fillTheDatabaseWithDummyData(){
         if(reviewRepository.count()==0){
-            reviewRepository.save(new Review(1, "Supergoeie film",7.8));
-            reviewRepository.save(new Review(2, "Amai dieje humor",9));
-            reviewRepository.save(new Review(3, "Beste film van De Rock",10));
-            reviewRepository.save(new Review(4, "Wa een rommel",2.1));
-            reviewRepository.save(new Review(5, "Hmmm, kan beter",3.5));
+            reviewRepository.save(new Review(1, "Supergoeie film",7.8, new Date()));
+            reviewRepository.save(new Review(2, "Amai dieje humor",9, new Date()));
+            reviewRepository.save(new Review(3, "Beste film van De Rock",10, new Date()));
+            reviewRepository.save(new Review(4, "Wa een rommel",2.1, new Date()));
+            reviewRepository.save(new Review(5, "Hmmm, kan beter",3.5, new Date()));
 
         }
 
