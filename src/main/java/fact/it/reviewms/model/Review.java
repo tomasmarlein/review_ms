@@ -11,6 +11,7 @@ public class Review {
     @Id
     private String id;
     private Integer movieId;
+//    private Integer movieUuid;
     private String text;
     private double rating;
     private Date date;
