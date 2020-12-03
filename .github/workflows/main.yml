@@ -2,7 +2,7 @@ name: Test, Build, Upload
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   compile:
