@@ -53,10 +53,6 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenGetReviewsByMovieUuid_thenReturnJsonReviews() throws Exception {
-//        List<Review> reviewList = new ArrayList<>();
-//        reviewList.add(review2Movie2);
-//        reviewList.add(review3Movie2);
-
         mockMvc.perform(get("/reviews/movie/{movieUuid}", 2))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -73,10 +69,6 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenGetAllReviews_thenReturnJsonReviews() throws Exception {
-//        List<Review> reviewList = new ArrayList<>();
-//        reviewList.add(review1Movie1);
-//        reviewList.add(review2Movie2);
-
         mockMvc.perform(get("/reviews/all"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
