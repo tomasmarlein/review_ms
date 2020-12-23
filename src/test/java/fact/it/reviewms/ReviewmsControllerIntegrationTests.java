@@ -53,9 +53,9 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenGetReviewsByMovieUuid_thenReturnJsonReviews() throws Exception {
-        List<Review> reviewList = new ArrayList<>();
-        reviewList.add(review2Movie2);
-        reviewList.add(review3Movie2);
+//        List<Review> reviewList = new ArrayList<>();
+//        reviewList.add(review2Movie2);
+//        reviewList.add(review3Movie2);
 
         mockMvc.perform(get("/reviews/movie/{movieUuid}", 2))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -73,14 +73,14 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenGetAllReviews_thenReturnJsonReviews() throws Exception {
-        List<Review> reviewList = new ArrayList<>();
-        reviewList.add(review1Movie1);
-        reviewList.add(review2Movie2);
+//        List<Review> reviewList = new ArrayList<>();
+//        reviewList.add(review1Movie1);
+//        reviewList.add(review2Movie2);
 
         mockMvc.perform(get("/reviews/all"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(4)))
                 .andExpect(jsonPath("$[0].uuid", is(1)))
                 .andExpect(jsonPath("$[0].movieUuid", is(1)))
                 .andExpect(jsonPath("$[0].text", is("review 1 movie 1")))
@@ -88,7 +88,15 @@ public class ReviewmsControllerIntegrationTests {
                 .andExpect(jsonPath("$[1].uuid", is(2)))
                 .andExpect(jsonPath("$[1].movieUuid", is(2)))
                 .andExpect(jsonPath("$[1].text", is("review 2 movie 2")))
-                .andExpect(jsonPath("$[1].rating", is(2.25)));
+                .andExpect(jsonPath("$[1].rating", is(2.25)))
+                .andExpect(jsonPath("$[1].uuid", is(3)))
+                .andExpect(jsonPath("$[1].movieUuid", is(2)))
+                .andExpect(jsonPath("$[1].text", is("review 3 movie 2")))
+                .andExpect(jsonPath("$[1].rating", is(3.75)))
+                .andExpect(jsonPath("$[1].uuid", is(4)))
+                .andExpect(jsonPath("$[1].movieUuid", is(3)))
+                .andExpect(jsonPath("$[1].text", is("review 4 movie 3 to be deleted")))
+                .andExpect(jsonPath("$[1].rating", is(9.25)));
     }
 
     @Test
