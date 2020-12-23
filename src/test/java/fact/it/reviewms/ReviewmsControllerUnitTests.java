@@ -57,7 +57,7 @@ public class ReviewmsControllerUnitTests {
                 .andExpect(jsonPath("$[1].uuid", is(2)))
                 .andExpect(jsonPath("$[1].movieUuid", is(1)))
                 .andExpect(jsonPath("$[1].text", is("review 2 movie 1")))
-                .andExpect(jsonPath("$[1].rating", is(2)));
+                .andExpect(jsonPath("$[1].rating", is(2.0)));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ReviewmsControllerUnitTests {
                 .andExpect(jsonPath("$[1].uuid", is(3)))
                 .andExpect(jsonPath("$[1].movieUuid", is(3)))
                 .andExpect(jsonPath("$[1].text", is("best rated")))
-                .andExpect(jsonPath("$[1].rating", is(10)));
+                .andExpect(jsonPath("$[1].rating", is(10.0)));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ReviewmsControllerUnitTests {
                 .andExpect(jsonPath("$[1].uuid", is(2)))
                 .andExpect(jsonPath("$[1].movieUuid", is(1)))
                 .andExpect(jsonPath("$[1].text", is("review 2 movie 1")))
-                .andExpect(jsonPath("$[1].rating", is(2)));
+                .andExpect(jsonPath("$[1].rating", is(2.0)));
     }
 
     @Test
