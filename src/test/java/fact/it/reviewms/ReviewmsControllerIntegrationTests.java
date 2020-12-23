@@ -89,14 +89,14 @@ public class ReviewmsControllerIntegrationTests {
                 .andExpect(jsonPath("$[1].movieUuid", is(2)))
                 .andExpect(jsonPath("$[1].text", is("review 2 movie 2")))
                 .andExpect(jsonPath("$[1].rating", is(2.25)))
-                .andExpect(jsonPath("$[1].uuid", is(3)))
-                .andExpect(jsonPath("$[1].movieUuid", is(2)))
-                .andExpect(jsonPath("$[1].text", is("review 3 movie 2")))
-                .andExpect(jsonPath("$[1].rating", is(3.75)))
-                .andExpect(jsonPath("$[1].uuid", is(4)))
-                .andExpect(jsonPath("$[1].movieUuid", is(3)))
-                .andExpect(jsonPath("$[1].text", is("review 4 movie 3 to be deleted")))
-                .andExpect(jsonPath("$[1].rating", is(9.25)));
+                .andExpect(jsonPath("$[2].uuid", is(3)))
+                .andExpect(jsonPath("$[2].movieUuid", is(2)))
+                .andExpect(jsonPath("$[2].text", is("review 3 movie 2")))
+                .andExpect(jsonPath("$[2].rating", is(3.75)))
+                .andExpect(jsonPath("$[3].uuid", is(4)))
+                .andExpect(jsonPath("$[3].movieUuid", is(3)))
+                .andExpect(jsonPath("$[3].text", is("review 4 movie 3 to be deleted")))
+                .andExpect(jsonPath("$[3].rating", is(9.25)));
     }
 
     @Test
