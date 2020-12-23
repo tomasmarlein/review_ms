@@ -116,17 +116,17 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenPutReview_thenReturnJsonReview() throws Exception {
-        Review updatedReview = new Review(6, 5, "review 6 movie 5", 6.25, new Date());
+        Review updatedReview = new Review(2, 2, "updated", 1.15, new Date());
 
         mockMvc.perform(put("/reviews")
                 .content(mapper.writeValueAsString(updatedReview))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid", is(6)))
-                .andExpect(jsonPath("$.movieUuid", is(5)))
-                .andExpect(jsonPath("$.text", is("review 6 movie 5")))
-                .andExpect(jsonPath("$.rating", is(6.25)));
+                .andExpect(jsonPath("$.uuid", is(2)))
+                .andExpect(jsonPath("$.movieUuid", is(2)))
+                .andExpect(jsonPath("$.text", is("updated")))
+                .andExpect(jsonPath("$.rating", is(1.15)));
     }
 
     @Test
