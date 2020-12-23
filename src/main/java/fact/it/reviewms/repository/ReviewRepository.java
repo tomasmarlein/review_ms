@@ -12,4 +12,5 @@ public interface ReviewRepository extends MongoRepository<Review, String> {
     List<Review> findReviewsByMovieUuid(Integer movieId);
     List<Review> findReviewsByRatingGreaterThan(Double rating);
     Review findReviewByMovieUuid(Integer movieId);
+    Review findReviewByUuid(Integer uuid);
 }
