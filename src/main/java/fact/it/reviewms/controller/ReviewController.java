@@ -34,11 +34,11 @@ public class ReviewController {
         return reviewRepository.findReviewsByMovieUuid(movieUuid);
     }
 
-    @GetMapping("/reviews/bestrated")
-    public List<Review> getReviewsByBestRated(){
-        return reviewRepository.findReviewsByRatingGreaterThan((double) 6);
-//        return reviewRepository.giveListOfBestRatedMovies();
-    }
+//    @GetMapping("/reviews/bestrated")
+//    public List<Review> getReviewsByBestRated(){
+//        return reviewRepository.findReviewsByRatingGreaterThan((double) 6);
+////        return reviewRepository.giveListOfBestRatedMovies();
+//    }
 
     @GetMapping("/reviews/all")
     public List<Review> getAllReviews(){
