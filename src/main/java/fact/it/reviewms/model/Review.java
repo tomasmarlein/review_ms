@@ -10,8 +10,9 @@ import java.util.Date;
 public class Review {
     @Id
     private String id;
-    private Integer movieId;
-//    private Integer movieUuid;
+    private Integer uuid;
+//    private Integer movieId;
+    private Integer movieUuid;
     private String text;
     private double rating;
     private Date date;
@@ -19,8 +20,10 @@ public class Review {
     public Review() {
     }
 
-    public Review(Integer movieId, String text, double rating, Date date) {
-        this.movieId = movieId;
+    public Review(Integer uuid, Integer movieUuid, String text, double rating, Date date) {
+//        this.id = id;
+        this.uuid = uuid;
+        this.movieUuid = movieUuid;
         this.text = text;
         this.rating = rating;
         this.date = date;
@@ -34,12 +37,20 @@ public class Review {
         this.id = id;
     }
 
-    public Integer getMovieId() {
-        return movieId;
+    public Integer getUuid() {
+        return uuid;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public void setUuid(Integer uuid) {
+        this.uuid = uuid;
+    }
+
+    public Integer getMovieUuid() {
+        return movieUuid;
+    }
+
+    public void setMovieUuid(Integer movieUuid) {
+        this.movieUuid = movieUuid;
     }
 
     public String getText() {
