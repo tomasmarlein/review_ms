@@ -30,10 +30,10 @@ public class ReviewmsControllerIntegrationTests {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    private Review review1Movie1 = new Review(1, 1, "review 1 movie 1", 7.25, new Date());
-    private Review review2Movie2 = new Review(2, 2, "review 2 movie 2", 2.25, new Date());
-    private Review review3Movie2 = new Review(3, 2, "review 3 movie 2", 3.75, new Date());
-    private Review reviewToBeDeleted = new Review(4, 3, "review 4 movie 3 to be deleted", 9.25, new Date());
+    private Review review1Movie1 = new Review("1", "1", "review 1 movie 1", 7.25, new Date());
+    private Review review2Movie2 = new Review("2", "2", "review 2 movie 2", 2.25, new Date());
+    private Review review3Movie2 = new Review("3", "2", "review 3 movie 2", 3.75, new Date());
+    private Review reviewToBeDeleted = new Review("4", "3", "review 4 movie 3 to be deleted", 9.25, new Date());
 
     @BeforeEach
     public void beforeAllTests() {
@@ -53,16 +53,16 @@ public class ReviewmsControllerIntegrationTests {
 
     @Test
     public void givenReview_whenGetReviewsByMovieUuid_thenReturnJsonReviews() throws Exception {
-        mockMvc.perform(get("/reviews/movie/{movieUuid}", 2))
+        mockMvc.perform(get("/reviews/movie/{movieUuid}", "2"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].uuid", is(2)))
-                .andExpect(jsonPath("$[0].movieUuid", is(2)))
+                .andExpect(jsonPath("$[0].uuid", is("2")))
+                .andExpect(jsonPath("$[0].movieUuid", is("2")))
                 .andExpect(jsonPath("$[0].text", is("review 2 movie 2")))
                 .andExpect(jsonPath("$[0].rating", is(2.25)))
-                .andExpect(jsonPath("$[1].uuid", is(3)))
-                .andExpect(jsonPath("$[1].movieUuid", is(2)))
+                .andExpect(jsonPath("$[1].uuid", is("3")))
+                .andExpect(jsonPath("$[1].movieUuid", is("2")))
                 .andExpect(jsonPath("$[1].text", is("review 3 movie 2")))
                 .andExpect(jsonPath("$[1].rating", is(3.75)));
     }
@@ -73,64 +73,64 @@ public class ReviewmsControllerIntegrationTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
-                .andExpect(jsonPath("$[0].uuid", is(1)))
-                .andExpect(jsonPath("$[0].movieUuid", is(1)))
+                .andExpect(jsonPath("$[0].uuid", is("1")))
+                .andExpect(jsonPath("$[0].movieUuid", is("1")))
                 .andExpect(jsonPath("$[0].text", is("review 1 movie 1")))
                 .andExpect(jsonPath("$[0].rating", is(7.25)))
-                .andExpect(jsonPath("$[1].uuid", is(2)))
-                .andExpect(jsonPath("$[1].movieUuid", is(2)))
+                .andExpect(jsonPath("$[1].uuid", is("2")))
+                .andExpect(jsonPath("$[1].movieUuid", is("2")))
                 .andExpect(jsonPath("$[1].text", is("review 2 movie 2")))
                 .andExpect(jsonPath("$[1].rating", is(2.25)))
-                .andExpect(jsonPath("$[2].uuid", is(3)))
-                .andExpect(jsonPath("$[2].movieUuid", is(2)))
+                .andExpect(jsonPath("$[2].uuid", is("3")))
+                .andExpect(jsonPath("$[2].movieUuid", is("2")))
                 .andExpect(jsonPath("$[2].text", is("review 3 movie 2")))
                 .andExpect(jsonPath("$[2].rating", is(3.75)))
-                .andExpect(jsonPath("$[3].uuid", is(4)))
-                .andExpect(jsonPath("$[3].movieUuid", is(3)))
+                .andExpect(jsonPath("$[3].uuid", is("4")))
+                .andExpect(jsonPath("$[3].movieUuid", is("3")))
                 .andExpect(jsonPath("$[3].text", is("review 4 movie 3 to be deleted")))
                 .andExpect(jsonPath("$[3].rating", is(9.25)));
     }
 
     @Test
     public void whenPostReview_thenReturnJsonReview() throws Exception {
-        Review review5Movie4 = new Review(5, 4, "review 5 movie 4", 5.25, new Date());
+        Review review5Movie4 = new Review("5", "4", "review 5 movie 4", 5.25, new Date());
 
         mockMvc.perform(post("/reviews")
                 .content(mapper.writeValueAsString(review1Movie1))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid", is(1)))
-                .andExpect(jsonPath("$.movieUuid", is(1)))
+                .andExpect(jsonPath("$.uuid", is("1")))
+                .andExpect(jsonPath("$.movieUuid", is("1")))
                 .andExpect(jsonPath("$.text", is("review 1 movie 1")))
                 .andExpect(jsonPath("$.rating", is(7.25)));
     }
 
     @Test
     public void givenReview_whenPutReview_thenReturnJsonReview() throws Exception {
-        Review updatedReview = new Review(2, 2, "updated", 1.15, new Date());
+        Review updatedReview = new Review("2", "2", "updated", 1.15, new Date());
 
         mockMvc.perform(put("/reviews")
                 .content(mapper.writeValueAsString(updatedReview))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid", is(2)))
-                .andExpect(jsonPath("$.movieUuid", is(2)))
+                .andExpect(jsonPath("$.uuid", is("2")))
+                .andExpect(jsonPath("$.movieUuid", is("2")))
                 .andExpect(jsonPath("$.text", is("updated")))
                 .andExpect(jsonPath("$.rating", is(1.15)));
     }
 
     @Test
     public void givenReview_whenDeleteReview_thenStatusOk() throws Exception {
-        mockMvc.perform(delete("/reviews/{uuid}", 4)
+        mockMvc.perform(delete("/reviews/{uuid}", "4")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void givenNoReview_whenDeleteReview_thenStatusNotFound() throws Exception {
-        mockMvc.perform(delete("/reviews/{uuid}", 100)
+        mockMvc.perform(delete("/reviews/{uuid}", "100")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
