@@ -30,7 +30,7 @@ public class ReviewController {
 //    }
 
     @GetMapping("/reviews/movie/{movieUuid}")
-    public List<Review> getReviewsByMovieUuid(@PathVariable Integer movieUuid){
+    public List<Review> getReviewsByMovieUuid(@PathVariable String movieUuid){
         return reviewRepository.findReviewsByMovieUuid(movieUuid);
     }
 
@@ -64,7 +64,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/reviews/{uuid}")
-    public ResponseEntity deleteReview(@PathVariable Integer uuid){
+    public ResponseEntity deleteReview(@PathVariable String uuid){
         Review review = reviewRepository.findReviewByUuid(uuid);
         if(review!=null){
             reviewRepository.delete(review);

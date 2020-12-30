@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends MongoRepository<Review, String> {
-    List<Review> findReviewsByMovieUuid(Integer movieId);
+    List<Review> findReviewsByMovieUuid(String movieUuid);
     List<Review> findReviewsByRatingGreaterThan(Double rating);
-    Review findReviewByMovieUuid(Integer movieId);
-    Review findReviewByUuid(Integer uuid);
+    Review findReviewByMovieUuid(String movieUuid);
+    Review findReviewByUuid(String uuid);
 }
