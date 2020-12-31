@@ -1,0 +1,87 @@
+apiVersion: v1                    # API version
+kind: Service                     # Type of kubernetes resource 
+metadata:
+  name: review-service-mongo      # Name of the service
+  labels:                         # Labels that will be applied to the service
+    app: review-service
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:                       # Selects any Pod with labels `app=review-service,tier=mongo`
+    app: review-service
+    tier: mongo
+  clusterIP: 10.100.1.2
+---
+apiVersion: apps/v1
+kind: Deployment                    # Type of the kubernetes resource
+metadata:
+  name: review-service-mongo-deployment           # Name of the deployment
+  labels:                           # Labels applied to this deployment 
+    app: review-service
+spec:
+  selector:
+    matchLabels:                    # This deployment applies to the Pods matching the specified labels
+      app: review-service
+      tier: mongo
+  strategy:
+    type: Recreate
+  template:                         # Template for the Pods in this deployment
+    metadata:
+      labels:                       # Labels to be applied to the Pods in this deployment
+        app: review-service
+        tier: mongo
+    spec:                           # The spec for the containers that will be run inside the Pods in this deployment
+      containers:
+      - image: mongo                # The container image
+        name: mongo
+        ports:
+        - containerPort: 27017        # The port that the container exposes       
+          name: mongo
+---
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: ms-review-deployment    # Name of the deployment
+  labels:                     # Labels that will be applied to this deployment
+    app: review-service
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: review-service
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: review-service
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+        - name: review-service
+          image: vanhouttejan4/review-ms
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8052 # The port that the container exposes
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:                    # Environment variables supplied to the Pod
+            - name: MONGODB_HOST
+              value: "10.100.1.2"
+
+---
+apiVersion: v1                      # API version
+kind: Service                       # Type of the kubernetes resource
+metadata:
+  name: review-service    # Name of the service
+  labels:                           # Labels that will be applied to this service
+    app: review-service
+spec:
+  type: NodePort                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  selector:
+    app: review-service   # The service exposes Pods with label `app=book-info-service-server`
+  ports:                            # Forward incoming connections on port 8080 to the target port 8051
+    - name: http
+      port: 8052
+      targetPort: 8052
