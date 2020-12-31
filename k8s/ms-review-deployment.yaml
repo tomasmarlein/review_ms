@@ -78,7 +78,7 @@ metadata:
   labels:                           # Labels that will be applied to this service
     app: review-service
 spec:
-  type: NodePort                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  type: ClusterIP                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
   selector:
     app: review-service   # The service exposes Pods with label `app=book-info-service-server`
   ports:                            # Forward incoming connections on port 8080 to the target port 8051
