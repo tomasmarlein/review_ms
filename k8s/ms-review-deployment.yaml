@@ -85,3 +85,4 @@ spec:
     - name: http
       port: 8052
       targetPort: 8052
+  clusterIP: 10.100.1.1
